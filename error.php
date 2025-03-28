@@ -88,6 +88,11 @@ class ErrorPlugin extends Plugin
 
         }
 
+        // Set the 404 HTTP response code.
+        if ($this->config->get('plugins.error.force_404_response', true)) {
+            $page->header()->http_response_code = 404;
+        }
+
         // Login page may not have the correct Cache-Control header set, force no-store for the proxies.
         $cacheControl = $page->cacheControl();
         if (!$cacheControl) {
